@@ -11,9 +11,9 @@ const int ACTION_LED = 2;
 int CountMemory = 0;
 int CurrentCode;
 int timeLeft;
-int binaryCode;
-int lastButtonStateRight = 0;
-int buttonStateRight = 0;
+int binaryCode = 0b1;
+int right_ButtonPressed = false;
+int left_ButtonPressed = false;
 int buttonPushCounter = 0;
 bool counterState = false;
 bool lockState = true;
@@ -42,9 +42,9 @@ void setup()
 
   
     void loop() {
-        int buttonStateRight = digitalRead(INPUT_BUTTON_RIGHT);
-        int buttonStateLeft = digitalRead(INPUT_BUTTON_LEFT);
-            if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==true) 
+        int right_ButtonPressed = digitalRead(INPUT_BUTTON_RIGHT);
+        int left_ButtonPressed = digitalRead(INPUT_BUTTON_LEFT);
+            if (left_ButtonPressed && right_ButtonPressed && lockState) 
                 { 
                     lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); 
                     counterState = true; 
@@ -52,7 +52,7 @@ void setup()
                     delay(1000);
     }
     
-    else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false) 
+    else if (left_ButtonPressed && right_ButtonPressed && lockState==false) 
             {
                 lcd.setCursor(0, 3); 
                 lcd.print("------STOPPED------"); 
@@ -61,7 +61,7 @@ void setup()
                 delay(1000);
     }
     
-   else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false && counterState==true) 
+   else if (left_ButtonPressed && right_ButtonPressed && lockState==false && counterState) 
             {
                 lcd.clear();
                 lcd.setCursor(0, 0); 
@@ -69,9 +69,9 @@ void setup()
                 lcd.setCursor(0, 1); 
                 lcd.print("  [0000000000] ");
                 lcd.setCursor(0, 2); 
-                lcd.print("   CODE: 0 "); 
+                lcd.print(" SEQUENCE: X "); 
                 lcd.setCursor(0, 3); 
-                lcd.print("           -RUNNING-");
+                lcd.print("-START COUNTER-");
     
     for (byte counter =0; counter<=1023; counter++) 
         { 
