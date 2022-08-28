@@ -1,0 +1,70 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+const int INPUT_BUTTON_LEFT = A3;
+const int INPUT_BUTTON_RIGHT = A2;
+const int barCount = 10;
+const int barLED[] = { 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12 };
+const int ACTION_LED = 2;
+
+
+int CountMemory = 0;
+int CurrentCode;
+int timeLeft;
+int binaryCode;
+int lastButtonStateRight = 0;
+int buttonStateRight = 0;
+int buttonPushCounter = 0;
+bool counterState = false;
+bool lockState = true;
+
+void setup()
+{
+    for(int i = 0; i < 10; i++){ pinMode(barLED[i],OUTPUT); }
+    
+    lcd.begin();
+    lcd.backlight();
+    lcd.print("XXXX         XXXXX");
+        lcd.setCursor(0, 2); lcd.print("    XXXXXX");
+        lcd.setCursor(0, 3); lcd.print("       XXXXXXX  ");
+        delay(1000);
+    lcd.setCursor(0, 1); lcd.print("  XXXX XXXX");
+    lcd.setCursor(0, 2); lcd.print("    LOCKED  ");
+    lcd.setCursor(0, 3); lcd.print(" - PRESS ENTER -");
+    
+  pinMode(INPUT_BUTTON_LEFT, INPUT);
+  pinMode(INPUT_BUTTON_RIGHT, INPUT);
+  pinMode(ACTION_LED, OUTPUT);
+}
+
+
+  
+    void loop() {
+    int buttonStateRight = digitalRead(INPUT_BUTTON_RIGHT);
+    int buttonStateLeft = digitalRead(INPUT_BUTTON_LEFT);
+    bool lockState = true;
+    if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==true) { lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); counterState = true; lockState = false; delay(1000);}
+    else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false) { lcd.setCursor(0, 3); lcd.print("------STOPPED------"); counterState = true; lockState = false; delay(1000);}
+    else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false && counterState==true) {
+    lcd.clear();
+    lcd.setCursor(0, 0); lcd.print("          TIME: 1024"); lcd.setCursor(0, 1); lcd.print("  [0000000000] ");
+    lcd.setCursor(0, 2); lcd.print("   CODE: 0 "); lcd.setCursor(0, 3); lcd.print("           -RUNNING-");
+    
+    for (byte counter =0; counter<=1023; counter++) { displayBinary(counter);  lcd.setCursor(9, 2); lcd.print(counter);  delay(500); } 
+    }
+    delay(50);  // Delay for my own sake
+  }
+
+
+
+
+// void unlocked() { lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); delay(30); }
+
+void displayBinary(byte numToShow) { for (int i =0;i<10;i++)
+  { if (bitRead(numToShow, i)==1) { digitalWrite(barLED[i], HIGH);
+              
+    }
+    else { digitalWrite(barLED[i], LOW); }
+  }
+}
