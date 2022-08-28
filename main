@@ -8,7 +8,6 @@ const int barCount = 10;
 const int barLED[] = { 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12 };
 const int ACTION_LED = 2;
 
-
 int CountMemory = 0;
 int CurrentCode;
 int timeLeft;
@@ -21,8 +20,10 @@ bool lockState = true;
 
 void setup()
 {
-    for(int i = 0; i < 10; i++){ pinMode(barLED[i],OUTPUT); }
-    
+    for(int i = 0; i < 10; i++)
+        {
+            pinMode(barLED[i],OUTPUT); 
+            }
     lcd.begin();
     lcd.backlight();
     lcd.print("XXXX         XXXXX");
