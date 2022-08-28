@@ -21,5 +21,5 @@ while paused, if right button pressed, increment counter by one.<br/>
 If both buttons pressed while stopped, set counterState = true and continue counter.<br/>
 <br/>
 loop<br/>
-![arduino-counter_i2C_LCD](https://user-images.githubusercontent.com/110015434/187098836-5fc7615c-0fd2-4043-bf09-5230ada1a892.png)
-https://mechatrofice.com/arduino/arduino-counter-code-circuit-working
+![arduino-counter_i2C_LCD](https://user-images.githubusercontent.com/110015434/187098836-5fc7615c-0fd2-4043-bf09-5230ada1a892.png)<br/>
+https://mechatrofice.com/arduino/arduino-counter-code-circuit-working<br/>
