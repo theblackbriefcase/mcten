@@ -82,10 +82,17 @@ void setup()
     delay(50);  // Delay for my own sake
   }
 
-void displayBinary(byte numToShow) { for (int i =0;i<10;i++)
-  { if (bitRead(numToShow, i)==1) {
-  digitalWrite(barLED[i], HIGH);
+void displayBinary(byte numToShow) 
+{ 
+for (int i =0;i<10;i++)
+  { 
+    if (bitRead(numToShow, i)==1) 
+        {
+            digitalWrite(barLED[i], HIGH);
    }
-    else { digitalWrite(barLED[i], LOW); }
+            else 
+                {
+                    digitalWrite(barLED[i], LOW); 
+                    }
   }
 }
