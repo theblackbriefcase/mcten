@@ -26,9 +26,9 @@ void setup()
     lcd.begin();
     lcd.backlight();
     lcd.print("XXXX         XXXXX");
-        lcd.setCursor(0, 2); lcd.print("    XXXXXX");
-        lcd.setCursor(0, 3); lcd.print("       XXXXXXX  ");
-        delay(1000);
+    lcd.setCursor(0, 2); lcd.print("    XXXXXX");
+    lcd.setCursor(0, 3); lcd.print("       XXXXXXX  ");
+    delay(1000);
     lcd.setCursor(0, 1); lcd.print("  XXXX XXXX");
     lcd.setCursor(0, 2); lcd.print("    LOCKED  ");
     lcd.setCursor(0, 3); lcd.print(" - PRESS ENTER -");
@@ -41,15 +41,14 @@ void setup()
 
   
     void loop() {
-    int buttonStateRight = digitalRead(INPUT_BUTTON_RIGHT);
-    int buttonStateLeft = digitalRead(INPUT_BUTTON_LEFT);
-    bool lockState = true;
-    if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==true) 
-    { 
-    lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); 
-    counterState = true; 
-    lockState = false; 
-    delay(1000);
+        int buttonStateRight = digitalRead(INPUT_BUTTON_RIGHT);
+        int buttonStateLeft = digitalRead(INPUT_BUTTON_LEFT);
+            if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==true) 
+                { 
+                    lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); 
+                    counterState = true; 
+                    lockState = false; 
+                    delay(1000);
     }
     
     else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false) {
