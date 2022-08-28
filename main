@@ -51,29 +51,33 @@ void setup()
                     delay(1000);
     }
     
-    else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false) {
-    lcd.setCursor(0, 3); 
-    lcd.print("------STOPPED------"); 
-    counterState = true; 
-    lockState = false; 
-    delay(1000);
+    else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false) 
+            {
+                lcd.setCursor(0, 3); 
+                lcd.print("------STOPPED------"); 
+                counterState = true; 
+                lockState = false; 
+                delay(1000);
     }
-   else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false && counterState==true) {
-   lcd.clear();
-   lcd.setCursor(0, 0); 
-   lcd.print("          TIME: 1024"); 
-   lcd.setCursor(0, 1); 
-   lcd.print("  [0000000000] ");
-   lcd.setCursor(0, 2); 
-   lcd.print("   CODE: 0 "); 
-   lcd.setCursor(0, 3); 
-   lcd.print("           -RUNNING-");
     
-    for (byte counter =0; counter<=1023; counter++) { 
-    displayBinary(counter);  
-    lcd.setCursor(9, 2); 
-    lcd.print(counter);  
-    delay(500); } 
+   else if (buttonStateRight==HIGH && buttonStateLeft==HIGH && lockState==false && counterState==true) 
+            {
+                lcd.clear();
+                lcd.setCursor(0, 0); 
+                lcd.print("          TIME: 1024"); 
+                lcd.setCursor(0, 1); 
+                lcd.print("  [0000000000] ");
+                lcd.setCursor(0, 2); 
+                lcd.print("   CODE: 0 "); 
+                lcd.setCursor(0, 3); 
+                lcd.print("           -RUNNING-");
+    
+    for (byte counter =0; counter<=1023; counter++) 
+        { 
+            displayBinary(counter);  
+            lcd.setCursor(9, 2); 
+            lcd.print(counter);  
+            delay(500); } 
     }
     delay(50);  // Delay for my own sake
   }
