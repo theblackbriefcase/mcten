@@ -45,22 +45,26 @@ void setup()
     void loop() {
         int right_ButtonPressed = digitalRead(INPUT_BUTTON_RIGHT);
         int left_ButtonPressed = digitalRead(INPUT_BUTTON_LEFT);
+
+            //unlockState
             if (left_ButtonPressed && right_ButtonPressed && unlockState==false) 
                 { 
-                    lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); 
-                    unlockState = true; 
-                    delay(1000);
-    }
+                  lcd.setCursor(0, 3); lcd.print("------UNLOCKED------"); 
+                  unlockState = true; 
+                  delay(1000);
+                }
     
-    else if (left_ButtonPressed && right_ButtonPressed && unlockState) 
+          //readyState
+          else if (left_ButtonPressed && right_ButtonPressed && unlockState) 
             {
-                lcd.setCursor(0, 3); 
-                lcd.print("------READY------"); 
-                readyState = true; 
-                delay(1000);
-    }
+              lcd.setCursor(0, 3); 
+              lcd.print("------READY------"); 
+              readyState = true; 
+              delay(1000);
+            }
     
-   else if (left_ButtonPressed && right_ButtonPressed && unlockState && readyState) 
+          // start counterState
+          else if (left_ButtonPressed && right_ButtonPressed && unlockState && readyState) 
             {
                counterState = true;
                 lcd.clear();
@@ -72,17 +76,22 @@ void setup()
                 lcd.print(" SEQUENCE: X "); 
                 lcd.setCursor(0, 3); 
                 lcd.print("-START COUNTER-");
-    // start coundown from 1024
-    for (byte counter =0; counter<=1023; counter++) 
-        { 
-            displayBinary(counter);  
-            lcd.setCursor(9, 2); 
-            lcd.print(counter);  
-            delay(500); } 
-    }
-     else if (left_ButtonPressed && right_ButtonPressed && unlockState && readyState && counterState) 
+
+                // start coundown from 1024
+                for (byte counter =0; counter<=1023; counter++) 
+                    { 
+                      displayBinary(counter);  
+                      lcd.setCursor(9, 2); 
+                      lcd.print(counter);  
+                      delay(500); 
+                    } 
+              }
+          
+          // stop counterState
+          else if (left_ButtonPressed && right_ButtonPressed && unlockState && readyState && counterState) 
             { 
               lcd.print("paused");
+              counterState = false;
             }
     delay(50);  // Delay for my own sake
   }
